@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Principal - Viña del Mar Jr</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/menuPrincipal.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" style="color: #000" href="#">Viña del Mar Jr</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #000" href="Empleados.html">Gestión de Empleados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #000" href="Nominas.html">Gestión de Nómina</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #000" href="Prestamos.html">Gestión de Préstamos</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn nav-link btn-custom" style="color: #000" id="logoutButton">Cerrar Sesión</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="background-animation">
+        <img src="imagenes/logo2.png" alt="Logo Viña del Mar Jr">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Verificar si el token existe en localStorage
+            if (!localStorage.getItem('token')) {
+                window.location.href = 'index.html'; // Redirige al login si no hay token
+            }
+
+            // Agregar el evento de cierre de sesión al botón
+            document.getElementById('logoutButton').addEventListener('click', function() {
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "¡No podrás revertir esto!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, cerrar sesión!',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        localStorage.removeItem('token');  // Eliminar el token de localStorage
+                        Swal.fire(
+                            'Sesión Cerrada!',
+                            'Tu sesión ha sido cerrada.',
+                            'success'
+                        ).then(() => {
+                            window.location.href = 'index.html'; // Redirige al login después de confirmar
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

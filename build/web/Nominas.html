@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Nóminas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link href="css/Nominas.css" rel="stylesheet" type="text/css"/>
+</head>
+<body onload="cargarEmpleados()">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" style=" color: #000" href="#">Viña del Mar Jr</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto w-100 justify-content-between">
+                    <li class="nav-item" >
+                        <a class="nav-link" style=" color: #000"  href="menuPrincipal.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  style=" color: #000" href="Empleados.html">Gestión de Empleados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style=" color: #000" href="Prestamos.html">Gestión de Préstamos</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn nav-link btn-custom"  style="color: #000" id="logoutButton">Cerrar Sesión</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2  style="color: #000" >Gestión de Nóminas</h2>
+        <form id="nominaForm">
+            <div class="form-group">
+                <label for="empleadoSelect"  style="color: #000" >Seleccionar Empleado:</label>
+                <select id="empleadoSelect" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <label for="sueldoBase"  style="color: #000">Sueldo Base:</label>
+                <input type="number" class="form-control" id="sueldoBase" required oninput="calcularTotal()">
+            </div>
+            <div class="form-group">
+                <label for="imss"  style="color: #000" >Deducción por IMSS:</label>
+                <input type="number" class="form-control" id="imss" value="0" oninput="calcularTotal()">
+            </div>
+            <div class="form-group">
+                <label for="retardos"  style="color: #000">Retardos:</label>
+                <input type="number" class="form-control" id="retardos" value="0" oninput="calcularTotal()">
+            </div>
+            <div class="form-group">
+                <label for="multas"  style="color: #000">Multas:</label>
+                <input type="number" class="form-control" id="multas" value="0" oninput="calcularTotal()">
+            </div>
+            <div class="form-group">
+                <label for="platosRotos"  style="color: #000">Platos Rotos:</label>
+                <input type="number" class="form-control" id="platosRotos" value="0" oninput="calcularTotal()">
+            </div>
+            <div class="form-group"  style="color: #000">
+                <label for="otros">Otros Descuentos:</label>
+                <input type="number" class="form-control" id="otros" value="0" oninput="calcularTotal()">
+            </div>
+            <div class="form-group">
+                <label for="totalPagar"  style="color: #000">Total a Pagar:</label>
+                <input type="number" class="form-control" id="totalPagar" readonly>
+            </div>
+            <button type="button" class="btn btn-primary"  style="color: #000" onclick="guardarYEnviarNomina()">Guardar y Enviar Nómina</button>
+        </form>
+    </div>
+    
+    <script>
+        // Verificar si el token existe en localStorage
+        if (!localStorage.getItem('token')) {
+            window.location.href = 'index.html'; // Redirige al login si no hay token
+        }
+        
+        
+         document.addEventListener('DOMContentLoaded', (event) => {
+            // Verificar si el token existe en localStorage
+            if (!localStorage.getItem('token')) {
+                window.location.href = 'index.html'; // Redirige al login si no hay token
+            }
+
+            // Agregar el evento de cierre de sesión al botón
+            document.getElementById('logoutButton').addEventListener('click', function() {
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    text: "¡No podrás revertir esto!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Sí, cerrar sesión!',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        localStorage.removeItem('token');  // Eliminar el token de localStorage
+                        Swal.fire(
+                            'Sesión Cerrada!',
+                            'Tu sesión ha sido cerrada.',
+                            'success'
+                        ).then(() => {
+                            window.location.href = 'index.html'; // Redirige al login después de confirmar
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="js/Nominas.js"></script>
+</body>
+</html>

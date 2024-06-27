@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/src/java/org/utl/dsm503/rest/RESTPrestamos.java</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/src/java/org/utl/dsm503/model/Empleado.java</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/src/java/org/utl/dsm503/model/Abono.java</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/src/java/org/utl/dsm503/utl/PdfGenerator.java</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/src/java/org/utl/dsm503/rest/RESTEmpleados.java</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/src/java/org/utl/dsm503/controller/PrestamosController.java</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/src/java/org/utl/dsm503/controller/NominaController.java</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/web/js/Nominas.js</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/web/js/Empleados.js</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/src/java/org/utl/dsm503/utl/MailSender.java</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/src/java/org/utl/dsm503/model/Prestamo.java</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/web/Empleados.html</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/web/META-INF/context.xml</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/web/Prestamos.html</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/web/Nominas.html</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/web/menuPrincipal.html</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/web/js/Prestamos.js</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/src/java/org/utl/dsm503/controller/EmpleadoController.java</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/src/java/org/utl/dsm503/model/Nomina.java</file>
+            <file>file:/C:/Users/diego/Documents/NetBeansProjects/estadiasNominaVDMJR/src/java/org/utl/dsm503/rest/RESTNominas.java</file>
+        </group>
+    </open-files>
+</project-private>

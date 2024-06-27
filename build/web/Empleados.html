@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Gestión de Empleados</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <link href="css/Empleados.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body onload="cargarEmpleados()">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-custom">
+            <a class="navbar-brand" style="color: #000 !important;" href="#">Viña Del Mar Jr</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #000 !important;" href="menuPrincipal.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-primary nav-link" onclick="prepararFormularioAgregar()">Agregar Empleado</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn btn-info nav-link" onclick="toggleTables('active')">
+                            <i class="fas fa-user-check"></i> Empleados Activos
+                        </button>
+                    </li>
+                    <li class="nav-item" >
+                        <button class="btn btn-secondary nav-link" style="color: #000" onclick="toggleTables('inactive')">
+                            <i class="fas fa-user-slash" style="color: #000"></i> Empleados Inactivos
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="btn nav-link btn-custom"  id="logoutButton">Cerrar Sesión</button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container-fluid mt-5">
+            <h2 class="mb-4">Gestión de Empleados</h2>
+            <div id="activeTable" style="display: block;" class="mt-3">
+                <table class="table table-bordered table-striped table-responsive-lg">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido Paterno</th>
+                            <th>Apellido Materno</th>
+                            <th>Teléfono</th>
+                            <th>Domicilio</th>
+                            <th>CURP</th>
+                            <th>Edad</th>
+                            <th>Rol</th>
+                            <th>Email</th>
+                            <th>Fecha de Ingreso</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaEmpleados"></tbody>
+                </table>
+            </div>
+
+            <div id="inactiveTable" style="display: none;" class="mt-3">
+                <table class="table table-bordered table-striped table-responsive-lg">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido Paterno</th>
+                            <th>Apellido Materno</th>
+                            <th>Teléfono</th>
+                            <th>Domicilio</th>
+                            <th>CURP</th>
+                            <th>Edad</th>
+                            <th>Rol</th>
+                            <th>Email</th>
+                            <th>Fecha de Salida</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaEmpleadosInactivos"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Modal para Agregar Empleado -->
+        <div class="modal fade" id="modalAgregarEmpleado" tabindex="-1" role="dialog" aria-labelledby="modalAgregarEmpleadoLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalAgregarEmpleadoLabel">Agregar Empleado</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <input type="hidden" id="idEmpleadoAgregar">
+                            <div class="form-group">
+                                <label for="nombreAgregar">Nombre</label>
+                                <input type="text" class="form-control" id="nombreAgregar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="apellidoPaternoAgregar">Apellido Paterno</label>
+                                <input type="text" class="form-control" id="apellidoPaternoAgregar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="apellidoMaternoAgregar">Apellido Materno</label>
+                                <input type="text" class="form-control" id="apellidoMaternoAgregar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefonoAgregar">Teléfono</label>
+                                <input type="text" class="form-control" id="telefonoAgregar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="domicilioAgregar">Domicilio</label>
+                                <input type="text" class="form-control" id="domicilioAgregar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="curpAgregar">CURP</label>
+                                <input type="text" class="form-control" id="curpAgregar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edadAgregar">Edad</label>
+                                <input type="number" class="form-control" id="edadAgregar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="fechaIngresoAgregar">Fecha de Ingreso</label>
+                                <input type="date" class="form-control" id="fechaIngresoAgregar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="emailAgregar">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="emailAgregar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="rolAgregar">Rol</label>
+                                <select class="form-control" id="rolAgregar" required>
+                                    <option value="mesero">Mesero</option>
+                                    <option value="garrotero">Garrotero</option>
+                                    <option value="bartender">Bartender</option>
+                                    <option value="coctelero">Coctelero</option>
+                                    <option value="cocinero">Cocinero</option>
+                                    <option value="gerente">Gerente</option>
+                                    <option value="almacenista">Almacenista</option>
+                                    <option value="limpieza">Limpieza</option>
+                                    <option value="labaloza">Labaloza</option>
+                                    <option value="administrativo">Administrativo</option>
+                                    <option value="cajero">Cajero</option>
+                                    <option value="repartidor">Repartidor</option>
+                                    <option value="mostrador">Mostrador</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="modalActionButtonAgregar" onclick="agregarEmpleado()">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para Editar Empleado -->
+        <div class="modal fade" id="modalEditarEmpleado" tabindex="-1" role="dialog" aria-labelledby="modalEditarEmpleadoLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalEditarEmpleadoLabel">Editar Empleado</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <input type="hidden" id="idEmpleadoEditar">
+                            <div class="form-group">
+                                <label for="nombreEditar">Nombre</label>
+                                <input type="text" class="form-control" id="nombreEditar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="apellidoPaternoEditar">Apellido Paterno</label>
+                                <input type="text" class="form-control" id="apellidoPaternoEditar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="apellidoMaternoEditar">Apellido Materno</label>
+                                <input type="text" class="form-control" id="apellidoMaternoEditar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefonoEditar">Teléfono</label>
+                                <input type="text" class="form-control" id="telefonoEditar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="domicilioEditar">Domicilio</label>
+                                <input type="text" class="form-control" id="domicilioEditar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="curpEditar">CURP</label>
+                                <input type="text" class="form-control" id="curpEditar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edadEditar">Edad</label>
+                                <input type="number" class="form-control" id="edadEditar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="fechaIngresoEditar">Fecha de Ingreso</label>
+                                <input type="date" class="form-control" id="fechaIngresoEditar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="emailEditar">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="emailEditar" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="rolEditar">Rol</label>
+                                <select class="form-control" id="rolEditar" required>
+                                    <option value="mesero">Mesero</option>
+                                    <option value="garrotero">Garrotero</option>
+                                    <option value="bartender">Bartender</option>
+                                    <option value="coctelero">Coctelero</option>
+                                    <option value="cocinero">Cocinero</option>
+                                    <option value="gerente">Gerente</option>
+                                    <option value="almacenista">Almacenista</option>
+                                    <option value="limpieza">Limpieza</option>
+                                    <option value="labaloza">Labaloza</option>
+                                    <option value="administrativo">Administrativo</option>
+                                    <option value="cajero">Cajero</option>
+                                    <option value="repartidor">Repartidor</option>
+                                    <option value="mostrador">Mostrador</option>
+                                </select>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="modalActionButtonEditar" onclick="actualizarEmpleado()">Actualizar</button>
+                        <button type="button" class="btn btn-danger" onclick="eliminarEmpleado()">Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para Empleados Inactivos -->
+        <div class="modal fade" id="modalEmpleadoInactivo" tabindex="-1" role="dialog" aria-labelledby="modalEmpleadoInactivoLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalEmpleadoInactivoLabel">Empleado Inactivo</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <input type="hidden" id="idEmpleadoInactivo">
+                            <div class="form-group">
+                                <label for="nombreInactivo">Nombre</label>
+                                <input type="text" class="form-control" id="nombreInactivo" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="apellidoPaternoInactivo">Apellido Paterno</label>
+                                <input type="text" class="form-control" id="apellidoPaternoInactivo" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="apellidoMaternoInactivo">Apellido Materno</label>
+                                <input type="text" class="form-control" id="apellidoMaternoInactivo" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefonoInactivo">Teléfono</label>
+                                <input type="text" class="form-control" id="telefonoInactivo" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="domicilioInactivo">Domicilio</label>
+                                <input type="text" class="form-control" id="domicilioInactivo" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="curpInactivo">CURP</label>
+                                <input type="text" class="form-control" id="curpInactivo" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="edadInactivo">Edad</label>
+                                <input type="number" class="form-control" id="edadInactivo" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="rolInactivo">Rol</label>
+                                <input type="text" class="form-control" id="rolInactivo" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="fechaSalidaInactivo">Fecha de Salida</label>
+                                <input type="date" class="form-control" id="fechaSalidaInactivo" disabled>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="reactivarEmpleado(document.getElementById('idEmpleadoInactivo').value)">Reactivar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            // Verificar si el token existe en localStorage
+            if (!localStorage.getItem('token')) {
+                window.location.href = 'index.html'; // Redirige al login si no hay token
+            }
+
+
+            document.addEventListener('DOMContentLoaded', (event) => {
+                // Verificar si el token existe en localStorage
+                if (!localStorage.getItem('token')) {
+                    window.location.href = 'index.html'; // Redirige al login si no hay token
+                }
+
+                // Agregar el evento de cierre de sesión al botón
+                document.getElementById('logoutButton').addEventListener('click', function () {
+                    Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: "¡No podrás revertir esto!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sí, cerrar sesión!',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            localStorage.removeItem('token');  // Eliminar el token de localStorage
+                            Swal.fire(
+                                    'Sesión Cerrada!',
+                                    'Tu sesión ha sido cerrada.',
+                                    'success'
+                                    ).then(() => {
+                                window.location.href = 'index.html'; // Redirige al login después de confirmar
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="js/Empleados.js"></script>
+    </body>
+</html>

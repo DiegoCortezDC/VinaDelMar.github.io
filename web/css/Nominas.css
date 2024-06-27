@@ -1,0 +1,98 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    background-color: #ffaf33;
+}
+
+.navbar-brand,
+.nav-link {
+    color: #000000;
+    font-size: 1.1rem; /* Aumentar tamaño de la letra */
+}
+
+.nav-item .nav-link {
+    padding: 0.5rem 1rem;
+    color: white;
+    border: none;
+    background-color: #ffaf33;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.nav-item .nav-link:hover {
+    background-color: #e69a00;
+}
+
+.nav-item .btn-custom {
+    padding: 0.5rem 1rem;
+    color: white;
+    border: none;
+    background-color: #ffaf33;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.nav-item .btn-custom:hover {
+    background-color: #e69a00;
+}
+
+.container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.btn-primary {
+    background-color: #ffaf33;
+    border-color: #ffaf33;
+}
+
+.btn-primary:hover {
+    background-color: #e69a00;
+    border-color: #e69a00;
+}
+
+/* Estilos para disponer los campos en una cuadrícula */
+#nominaForm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+#nominaForm .form-group {
+    flex: 1 1 calc(33.333% - 1rem); /* Ajuste para hacer 3 columnas */
+    min-width: 200px; /* Asegurar un mínimo de ancho */
+}
+
+#nominaForm .form-group input,
+#nominaForm .form-group select {
+    width: 100%;
+}
+/* Ajuste para el campo de nombre completo */
+.modal-body .form-group #nombreCompleto {
+    width: 100%;
+}
+
+/* Aumentar el tamaño del botón "Abonar" */
+.modal-body .form-group .btn-success {
+    width: 100%;
+    font-size: 1.25rem; /* Aumenta el tamaño del texto */
+    padding: 0.75rem; /* Aumenta el padding */
+}
